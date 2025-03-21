@@ -1,0 +1,55 @@
+/* Main App container */
+.App {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header specific styles */
+.App-header {
+  background-color: #15004d;
+  padding: 20px;
+  color: white;
+}
+
+/* Link styles */
+.App-link {
+  color: #61dafb;
+  text-decoration: none;
+}
+
+.App-link:hover {
+  text-decoration: underline;
+}
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #ffffff;
+  color: #333;
+}
+
+/* Footer styles */
+.App-footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .App-header {
+    padding: 15px;
+  }
+  
+  .main-content {
+    padding: 15px;
+  }
+  
+  .App-footer {
+    padding: 10px;
+  }
+}

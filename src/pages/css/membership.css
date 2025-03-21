@@ -1,0 +1,143 @@
+/* 🔹 Contenedor principal */
+.membership-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 🔹 Grid para las tarjetas */
+.membership-grid {
+  display: flex; /* Mantiene las tarjetas en línea */
+  justify-content: center; /* Centra las tarjetas */
+  gap: 20px; /* Espacio uniforme */
+  flex-wrap: wrap; /* Permite que se ajusten en pantallas pequeñas */
+  padding: 20px;
+  align-items: stretch; /* Hace que todas las tarjetas tengan la misma altura */
+}
+
+/* 🔹 Estilos de cada tarjeta */
+.membership-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Asegura que el botón esté alineado abajo */
+  min-height: 450px; /* Ajusta la altura mínima para que todas sean iguales */
+}
+
+.membership-card:hover {
+  transform: scale(1.05);
+}
+
+/* 🔹 Insignia de Mejor Opción */
+.best-value-badge {
+  background: gold;
+  color: black;
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+/* 🔹 Estilos del título de los planes */
+.membership-card h3 {
+  color: #333;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+/* 🔹 Precio */
+.membership-card p.price {
+  color: #0022aa;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* 🔹 Lista de beneficios */
+.membership-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1; /* Permite que el contenido se expanda */
+}
+
+.membership-card ul li {
+  color: #333;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+/* 🔹 Estilos de los botones */
+.join-button {
+  background: #0022aa;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-top: auto; /* Empuja el botón hacia la parte inferior */
+}
+
+.join-button:hover {
+  background: #001188;
+  transform: scale(1.05);
+}
+
+/* 🔹 Diseño Responsive */
+
+/* 2 columnas en tablets */
+@media (max-width: 992px) {
+  .membership-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* 1 columna en móviles */
+@media (max-width: 600px) {
+  .membership-card {
+    max-width: 400px;
+    width: 90%;
+  }
+}
+.footer4 {
+  background: var(--color-steel);
+  padding: 20px 0;
+  width: 100vw; /* Ocupa todo el ancho de la ventana */
+  position: relative; /* Mantiene su posición relativa al contenido */
+  text-align: center;
+  transition: margin 0.3s ease-in-out;
+  margin-bottom: -20px;
+  margin-left: -20px;
+}
+
+/* Asegurar que el footer siempre esté centrado y no afectado por el sidebar */
+.sidebar.open ~ .footer4 {
+  margin-left: 183px;
+  padding-right: 20px;
+  transition: margin 0.3s ease-in-out;
+  bottom: 0;
+  width: calc(100% - 50px); /* Ancho del sidebar */
+}
+
+/* Evitar espacios en blanco */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  /* Evita desbordamiento horizontal */
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: var(--transition);
+  margin-left: 0px;
+  margin-right: 80px;
+}

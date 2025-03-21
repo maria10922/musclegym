@@ -1,0 +1,127 @@
+.cart-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.cart-table th,
+.cart-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.cart-item img {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-controls button {
+  padding: 5px 10px;
+  border: 1px solid #0022aa;
+
+  background-color: #0022aa;
+
+  cursor: pointer;
+}
+
+.cart-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.btn-purchase-all,
+.btn-clear-cart {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-purchase-all {
+  background-color: #0022aa;
+
+  color: white;
+}
+
+.btn-clear-cart {
+  background-color: #dc3545;
+  color: white;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+tfoot td {
+  font-weight: bold;
+  background-color: #f8f9fa00;
+}
+.footer6 {
+  background: var(--color-steel);
+  padding: 20px 0;
+  width: 100vw; /* Ocupa todo el ancho de la ventana */
+  position: relative; /* Mantiene su posición relativa al contenido */
+  text-align: center;
+  transition: margin 0.3s ease-in-out;
+  margin-top: 20px; /* Adjusted margin */
+  margin-bottom: 0; /* Removed negative margin */
+  margin-left: 0; /* Removed left margin */
+}
+
+
+/* Asegurar que el footer siempre esté centrado y no afectado por el sidebar */
+.sidebar.open ~ .footer6 {
+  margin-left: 183px;
+  padding-right: 20px;
+  transition: margin 0.3s ease-in-out;
+  bottom: 0;
+  width: calc(100% - 50px); /* Ancho del sidebar */
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--background-secondary);
+  border-radius: 10px;
+  padding: 0px 25px;
+  margin: 1px auto;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 2px 5px rgba(0, 2, 136, 0.2);
+  margin-top: 30px;
+}
+
+.search-icon {
+  color: var(--text-primary);
+  margin-right: 10px;
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  background: none;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 16px;
+}

@@ -1,0 +1,189 @@
+/* 🔹 Reset de estilos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 🔹 Ajuste del body */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+/* 🔹 Contenedor principal */
+.register-container {
+  display: flex;
+  width: 750px; /* Ajuste del ancho */
+  height: 400px; /* Ajuste de la altura */
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 🔹 Panel izquierdo (Formulario) */
+.left {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  height: 100%;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+.left h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #15005e;
+  margin-bottom: 0;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 90px;
+}
+
+
+/* 🔹 Formulario */
+.register-form {
+  width: 100%;
+  max-width: 500px; /* 🔹 Asegura que los inputs no se desborden */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+/* 🔹 Inputs */
+.form-group {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 2px;
+  border: 1px solid #0002799a;
+  border-radius: 5px;
+  font-size: 14px;
+  background: #f8f9fa;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.form-group input:focus {
+  border-color: #001b66; /* Color naranja */
+  outline: none; /* Opcional: elimina el contorno azul por defecto */
+  box-shadow: 0 0 5px rgba(6, 0, 90, 0.5); /* Efecto de brillo */
+}
+.form-group input::placeholder {
+  color: #002a57; /* Azul */
+  opacity: 1; /* Asegura que el color sea visible en algunos navegadores */
+}
+
+/* 🔹 Ajuste del input de archivo */
+.form-group input[type="file"] {
+  padding: 5px;
+}
+
+/* 🔹 Botón de registro */
+.register-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  background: #001f60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 0px;
+}
+
+.register-button:hover {
+  background: #0033aa;
+}
+
+/* 🔹 Enlace para iniciar sesión */
+.register-link {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.register-link a {
+  color: #001f60;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+/* 🔹 Panel derecho (Imagen con superposición) */
+.right {
+  flex: 1;
+  background: url('/public/imagenes/inicio.jpeg') no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 70px;
+  color: white;
+  position: relative;
+  height: 100%;
+}
+
+/* 🔹 Capa de superposición negra semitransparente */
+.right::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Negro semitransparente */
+  z-index: 0; /* Coloca la capa detrás del texto */
+}
+
+
+/* 🔹 Estilos del texto en la imagen */
+.right h2, .right p {
+  font-size: 28px;
+  font-weight: bold;
+  color: #160064;
+  position: relative;
+  z-index: 1;  
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+/* 🔹 Diseño responsive */
+@media (max-width: 768px) {
+  .register-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .right-panel {
+    height: 250px;
+  }
+
+  .left-panel {
+    padding: 20px;
+  }
+
+  .register-form {
+    max-width: 100%;
+  }
+}

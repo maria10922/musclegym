@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+
+/* Definición de variables de colores */
+:root {
+  --color-black: #ffffff;  /* Fondo claro */
+  --color-steel: #444444;  /* Texto oscuro */
+  --color-gold: #005f99;   /* Azul cobalto */
+  --color-red: #008ecc;    /* Azul brillante */
+  --color-white: #0044ff;  /* Azul eléctrico */
+
+  --background-color: var(--color-black);
+  --text-color: var(--color-steel);
+  --button-bg: var(--color-gold);
+  --button-text: #ffffff;
+  --button-hover: var(--color-red);
+  --transition: all 0.3s ease-in-out;
+}
+
+/* Modo oscuro */
+:root[data-theme="dark"] {
+  --color-black: #111111;  /* Negro profundo */
+  --color-steel: #bbbbbb;  /* Texto más claro */
+  --color-gold: #015291;   /* Azul cobalto oscuro */
+  --color-red: #006699;    /* Azul brillante oscuro */
+  --color-white: #0022aa;  /* Azul oscuro */
+
+  --background-color: var(--color-black);
+  --text-color: var(--color-steel);
+  --button-bg: var(--color-gold);
+  --button-text: #ffffff;
+  --button-hover: var(--color-red);
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Rajdhani', sans-serif;
+  transition: var(--transition);
+}
+
+/* Contenedor de información */
+.about-container {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 20px;
+}
+
+/* Botón para cambiar de tema */
+button.theme-toggle {
+  background-color: var(--button-bg);
+  color: var(--button-bg);
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: var(--transition);
+  outline: none;
+}
+
+button.theme-toggle:hover {
+  background-color: var(--button-hover);
+  color: #ffffff; /* Asegura que el texto sea visible */
+}
+
+/* Estilos generales */
+.page {
+  text-align: center;
+  padding: 50px;
+  margin-bottom: 40px;
+}
+
+/* Encabezado */
+.header {
+  padding: 40px 20px;
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.308);
+  transition: var(--transition);
+  background-image: url('/public/imagenes/inicio.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 380px;
+  width: 100%;
+  border-radius: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.5em;
+  color: var(--color-white);
+}
+
+.header p {
+  color: var(--color-black);
+}
+
+/* Botones generales */
+.button-container {
+  margin-top: 20px;
+}
+
+.btn {
+  background-color: var(--color-gold);
+  color: white;
+  border: none;
+  padding: 20px 40px;
+  margin: 20px;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: var(--transition);
+  width: fit-content;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: var(--color-red);
+}
+
+/* SECCIÓN DE CARACTERÍSTICAS */
+.features {
+  margin: 40px 0;
+  padding: 20px;
+  text-align: center;
+}
+
+.features h2 {
+  font-size: 2em;
+}
+
+.feature-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.feature-card {
+  background: var(--background-color);
+  padding: 20px;
+  border-radius: 10px;
+  width: 250px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-card h3 {
+  color: var(--color-gold);
+}
+
+.feature-card p {
+  font-size: 0.9em;
+}

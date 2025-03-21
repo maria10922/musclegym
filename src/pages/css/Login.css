@@ -1,0 +1,148 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.login-card {
+  display: flex;
+  width: 750px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.login-image-panel {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  background-image: url('/public/imagenes/inicio.jpeg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Botón de registro */
+.register-button:hover {
+  background: #0033aa;
+}
+
+/* Enlace para registrarse */
+.signup-link {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.signup-link a {
+  color: #001f60;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+/* Capa de color sobre la imagen */
+.login-image-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Ajusta el color y la opacidad */
+}
+
+/* Asegura que el texto se vea encima */
+.login-image-panel h1 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #160064;
+  position: relative;
+  z-index: 1;
+}
+
+.login-image-panel h1 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #160053;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+.login-form-panel {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-form-panel h2 {
+  font-size: 22px;
+  margin-bottom: 0px;
+  margin-top: 20px;
+  color: #1d0085;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  width: 80%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background: #f8f9fa;
+  color: #000;
+  font-size: 16px;
+}
+
+button {
+  width: 85%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #0044cc;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #007bff;
+}
+
+.auth-links {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  font-size: 14px;
+}
+
+.auth-links a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}

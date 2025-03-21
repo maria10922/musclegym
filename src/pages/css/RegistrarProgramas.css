@@ -1,0 +1,53 @@
+h1 {
+  color: #0022aa;
+
+  text-align: center; /* Centrar el título */
+  font-size: 16px;
+  text-wrap: balance; /* Ajustar el texto */
+}
+
+form {
+  background: #0022aa00; /* Cambiar a blanco para mejor contraste */
+
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(5, 0, 73, 0.315); /* Aumentar la sombra */
+  max-width: 400px; /* Limitar el ancho del formulario */
+  margin: 40px auto; /* Separar del header y footer */
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #0022aa;
+
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px; /* Aumentar el margen inferior */
+  border: 1px solid #0022aa;
+
+  border-radius: 5px;
+  box-sizing: border-box; /* Ajustar el tamaño del borde */
+}
+
+button {
+  background: #0022aa;
+
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%; /* Hacer el botón del ancho completo */
+}
+
+button:hover {
+  background: #001188;
+}
+button:hover {
+  background: #001188;
+}

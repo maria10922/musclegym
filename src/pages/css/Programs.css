@@ -1,0 +1,579 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+
+/* Definición de variables de colores */
+:root {
+  --color-black: #ffffff;  /* Fondo claro */
+  --color-steel: #444444;  /* Texto oscuro */
+  --color-gold: #005f99;   /* Azul cobalto */
+  --color-red: #008ecc;    /* Azul brillante */
+  --color-white: #0044ff;  /* Azul eléctrico */
+
+  --background-color: var(--color-black);
+  --text-color: var(--color-steel);
+  --button-bg: var(--color-gold);
+  --button-text: #ffffff;
+  --button-hover: var(--color-red);
+  --transition: all 0.3s ease-in-out;
+}
+
+/* Modo oscuro */
+:root[data-theme="dark"] {
+  --color-black: #111111;  /* Negro profundo */
+  --color-steel: #bbbbbb;  /* Texto más claro */
+  --color-gold: #015291;   /* Azul cobalto oscuro */
+  --color-red: #006699;    /* Azul brillante oscuro */
+  --color-white: #0022aa;  /* Azul oscuro */
+
+  --background-color: var(--color-black);
+  --text-color: var(--color-steel);
+  --button-bg: var(--color-gold);
+  --button-text: #ffffff;
+  --button-hover: var(--color-red);
+}
+/* Contenedor de la lista de ejercicios */
+.exercises-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  margin: 5px 0;
+  position: relative; /* Asegura que los elementos hijos posicionados sean relativos a este contenedor */
+}
+
+/* Cada ejercicio */
+.exercise-item {
+  flex: 0 0 calc(33.33% - 10px);
+  margin: 5px;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative; /* Permite que el botón de cierre se posicione dentro */
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Asegura que el botón se alinee a la derecha */
+  padding: 10px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  position: relative; /* Permite posicionar el botón dentro */
+}
+
+/* Estilo del botón de cierre */
+.close-btn {
+  background: rgba(255, 0, 0, 0.1);
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: #ff0000;
+  padding: 4px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  background: #ff0000;
+  color: white;
+  transform: scale(1.1);
+}
+
+
+
+/* Exercise Details */
+.exercise-info {
+  margin-bottom: 0px;
+}
+
+.exercise-info h4 {
+  color: var(--text-color, #333);
+  margin-bottom: 1px;
+  font-size: 16px; /* Tamaño de fuente ajustado */
+}
+
+.exercise-info p {
+  color: #666;
+  margin: 3px 0;
+  font-size: 14px; /* Texto más compacto */
+}
+
+/* Progress Bar */
+.progress-bar {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress {
+  height: 20px;
+  background-color: #76c7c0; /* Color de la barra de progreso */
+  transition: width 0.3s ease;
+}
+
+/* Exercise Controls */
+.exercise-controls {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Buttons */
+.start-exercise-btn,
+.complete-btn {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 100;
+}
+
+.start-exercise-btn {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+}
+
+.complete-btn {
+  background-color: var(--color-gold);
+  color: var(--button-text);
+}
+
+/* Progress Indicators */
+.progress-indicator {
+  margin-top: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Scrollbar Styling */
+.exercises-container::-webkit-scrollbar {
+  width: 4 px;
+}
+
+.exercises-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.exercises-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.exercises-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.timer-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.view-exercises-btn {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  padding: 20px;
+  margin: 0px;
+  border: none; /* Asegúrate de que no haya borde */
+  border-radius: 4px; /* Opcional: añade bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar el ratón */
+  transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+}
+
+.view-exercises-btn:hover {
+  background-color: lighten(var(--button-bg), 10%); /* Cambia el color de fondo al pasar el ratón */
+}
+
+.timer-btn:first-child {
+  background-color: var(--color-gold);
+  color: white;
+}
+
+.timer-btn:nth-child(2) {
+  background-color: var(--color-red);
+  color: white;
+}
+
+.timer-btn:last-child {
+  background-color: var(--color-white);
+  color: black;
+}
+
+.timer-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.timer-btn.active {
+  background-color: var(--color-gold);
+}
+
+.timer-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para el modal */
+.sidebar {
+  background: var(--color-steel);
+  width: 80px; /* Ajustar el ancho del sidebar cuando está cerrado */
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: var(--transition);
+  border-right: 1px solid rgba(201, 162, 61, 0.1);
+  z-index: 1100;
+}
+
+.sidebar.open {
+  width: 240px;
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+
+.sidebar.open ~ .footer {
+  width: calc(100% - 190px); /* Ajustar el ancho del footer cuando el sidebar está abierto */
+  margin-left: 210px; /* Desplazar el footer cuando el sidebar está abierto */
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .about-container.nav-open .page {
+    margin-left: 80px;
+  }
+
+  .about-container.nav-open .footer {
+    margin-left: 80px;
+  }
+
+  .sidebar.open {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .sidebar a {
+    justify-content: flex-start;
+    padding: 10px 20px;
+  }
+
+  .sidebar a span {
+    display: inline;
+  }
+
+  .tooltip {
+    display: none;
+  }
+
+  .about-section {
+    padding: 80px 20px;
+  }
+
+  .about-section h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section {
+    padding: 60px 10px;
+  }
+
+  .about-section h2 {
+    font-size: 1.2rem;
+  }
+}
+/* Fondo oscuro del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Oscurece el fondo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Contenedor principal del modal */
+.modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Encabezado del modal */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.modal-header h3 {
+  font-size: 22px;
+  color: #333;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #777;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+
+/* Lista de ejercicios */
+.exercises-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exercise-item {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  margin: 0;
+  display: flex;
+}
+
+.exercise-item:hover {
+  background: #e3e3e3;
+}
+
+.exercise-item h4 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.exercise-item p {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin: 1px 0;
+}
+
+/* Botón para comenzar el ejercicio */
+.start-exercise-btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.start-exercise-btn:hover {
+  background: #2980b9;
+}
+
+/* Modal de ejecución de ejercicios */
+.exercise-execution {
+  text-align: center;
+}
+
+.exercise-execution p {
+  font-size: 16px;
+  color: #555;
+  margin: 8px 0;
+}
+
+/* Barra de progreso */
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #ddd;
+  border-radius: 5px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: #27ae60;
+  transition: width 0.4s ease-in-out;
+}
+
+/* Controles del ejercicio */
+.exercise-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.exercise-controls button {
+  background: #0022aa;
+
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.exercise-controls button:hover {
+  background: #27ae60;
+}
+
+/* Estilos específicos para los botones */
+.exercise-controls button:nth-child(2) {
+  background: #f39c12;
+}
+
+.exercise-controls button:nth-child(2):hover {
+  background: #e67e22;
+}
+
+.exercise-controls button:nth-child(3) {
+  background: #3498db;
+}
+
+.exercise-controls button:nth-child(3):hover {
+  background: #2980b9;
+}
+
+.exercise-controls button:nth-child(4) {
+  background: #e74c3c;
+}
+
+.exercise-controls button:nth-child(4):hover {
+  background: #c0392b;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+/* Ajuste para cuando el sidebar esté abierto */
+.sidebar.open ~ .footer2 {
+  margin-left: 120px; /* Ajustar el margen izquierdo */
+  margin-right: 0px; /* Ajustar el margen derecho */
+  min-width: 1195px; /* Ajustar el ancho */
+  max-width: 1000px; /* Ajustar el ancho */
+  width: 100%; /* Ajustar el ancho */
+  margin-left: 130px; /* Ajustar el margen izquierdo */
+  padding-left: 10%; /* Ajustar el margen izquierdo */
+}
+.sidebar.open ~ .page {
+  margin-left: 120px; /* Ajustar el margen izquierdo */
+  margin-right: 0px; /* Ajustar el margen derecho */
+  min-width: 1195px; /* Ajustar el ancho */
+  max-width: 1000px; /* Ajustar el ancho */
+  width: 100%; /* Ajustar el ancho */
+  margin-left: 130px; /* Ajustar el margen izquierdo */
+  padding-left: 10%; /* Ajustar el margen izquierdo */
+}
+.footer2 {
+  background: var(--color-steel);
+  padding: 30px 0 10px; /* Reducir el padding */
+  width: 161%;
+  height: 100%;
+  position: relative;
+  margin-bottom: -20px;
+  margin-right: -20px;
+  margin-left: -200px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px; /* Añadido un padding para que no se vea tan pegado */
+}
+
+.footer-section {
+  margin-bottom: 30px;
+  text-align: center; /* Centrar contenido si es necesario */
+}
+
+.footer-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+.footer-section p, 
+.footer-section a {
+  color: var(--color-white);
+}
+
+.footer-section a {
+  text-decoration: underline;
+}
+
+.footer-section a:hover {
+  color: var(--color-primary);
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Espacio entre iconos */
+  margin-bottom: 20px;
+}
+
+.social-icons a {
+  color: var(--color-white);
+  font-size: 1.5rem; /* Asegurar buen tamaño */
+}
+
+.social-icons a:hover {
+  color: var(--color-primary);
+}

@@ -1,0 +1,140 @@
+.profile-container {
+    text-align: center;
+    padding: 200px;
+  }
+  .profile-table {
+    width: 100%;
+    max-width: 500px;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+/* Estilos para la barra de progreso */
+.progress-bar {
+  width: 60%; /* Ajusta el ancho para que sea menos larga */
+  height: 30px; /* Aumenta la altura */
+  background-color: #00025c65;
+  border-radius: 15px;
+  overflow: hidden;
+  margin: 20px auto; /* Centrar la barra */
+  border: 1px solid #0e018149; /* Opcional: Agrega un borde */
+}
+
+/* Estilos para el progreso */
+.progress {
+  height: 100%;
+  width: 0%;
+  transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
+  border-radius: 15px;
+}
+
+  .profile-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .profile-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .profile-image-cell {
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #007BFF;
+  }
+
+  .profile-image {
+    width: 100px; /* Ajusta el tamaño según necesites */
+    height: 100px;
+    border-radius: 50%; /* Hace que la imagen sea redonda */
+    object-fit: cover; /* Evita que se deforme */
+    margin-bottom: 10px;
+  }
+
+ /* 🔹 Contenedor principal */
+.pixel-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Press Start 2P', cursive; /* Fuente estilo retro */
+  }
+  
+  /* 🔹 Texto LOADING... animado */
+  .loading-text {
+    font-size: 24px; /* 🔥 Más grande */
+    color: rgb(255, 255, 255);
+    margin-bottom: 15px;
+    animation: blink 1s infinite alternate;
+  }
+  
+  @keyframes blink {
+    0% { opacity: 1; }
+    100% { opacity: 0.5; }
+  }
+  
+  /* 🔹 Barra de Carga Pixelada MÁS GRANDE */
+  .loading-bar {
+    width: 350px; /* 🔥 Más ancha */
+    height: 50px; /* 🔥 Más alta */
+    border: 6px solid rgb(255, 255, 255);
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+  }
+  
+  /* 🔹 Animación de carga en rojo */
+  .loading-fill {
+    height: 100%;
+    width: 0%;
+    background-color: rgb(0, 189, 85);
+    animation: loadAnimation 2s infinite linear;
+  }
+  
+  @keyframes loadAnimation {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+  .footer5 {
+    background: var(--color-steel);
+    padding: 20px 0;
+    width: 100vw; /* Ocupa todo el ancho de la ventana */
+    position: relative; /* Mantiene su posición relativa al contenido */
+    text-align: center;
+    transition: margin 0.3s ease-in-out;
+    margin-bottom: -20px;
+    margin-left: -20px;
+  }
+  
+  /* Asegurar que el footer siempre esté centrado y no afectado por el sidebar */
+  .sidebar.open ~ .footer5 {
+    margin-left: 183px;
+    padding-right: 20px;
+    transition: margin 0.3s ease-in-out;
+    bottom: 0;
+    width: calc(100% - 50px); /* Ancho del sidebar */
+  }
+  
+  /* Evitar espacios en blanco */
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    /* Evita desbordamiento horizontal */
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: var(--transition);
+    margin-left: 0px;
+    margin-right: 80px;
+  }
