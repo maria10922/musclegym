@@ -13,6 +13,8 @@ const RegistrarProgramas = () => {
   const [registroExitoso, setRegistroExitoso] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [registroData, setRegistroData] = useState(null); // Nuevo estado para almacenar los datos registrados
+  
 
 
   const handleSubmit = async (e) => {
@@ -57,9 +59,15 @@ const RegistrarProgramas = () => {
       if (response.status === 200 || response.status === 201) {
         console.log('Registro exitoso:', response.data);
         setRegistroExitoso(true);
+        
+        // Guardar los datos registrados en otro estado
+        setRegistroData({ name, email, program });
+    
+        // Limpiar los campos del formulario
         setName('');
         setEmail('');
-      }
+    }
+    
 
     } catch (error) {
       console.error('Error al registrar:', error);
@@ -94,39 +102,38 @@ const RegistrarProgramas = () => {
       <h1>Registro para el Programa: {program}</h1>
 
       {registroExitoso ? (
-        <div>
-          <h2>¡Registro Exitoso!</h2>
-          <p>Nombre: {name}</p>
-          <p>Email: {email}</p>
-          <p>Programa: {program}</p>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Nombre:</label>
-            <input 
-              type="text" 
-              value={name} 
-              onChange={(e) => setName(e.target.value)} 
-              required 
-            />
-          </div>
-          <div>
-            <label>Email:</label>
-            <input 
-              type="email" 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
-              required 
-            />
-          </div>
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? 'Registrando...' : 'Registrar'}
-          </button>
-          {errorMessage && <div className="error-message">{errorMessage}</div>}
-
-        </form>
-      )}
+  <div>
+    <h2>¡Registro Exitoso!</h2>
+    <p><strong>Nombre:</strong> {registroData?.name}</p>
+    <p><strong>Email:</strong> {registroData?.email}</p>
+    <p><strong>Programa:</strong> {registroData?.program}</p>
+  </div>
+) : (
+  <form onSubmit={handleSubmit}>
+    <div>
+      <label>Nombre:</label>
+      <input 
+        type="text" 
+        value={name} 
+        onChange={(e) => setName(e.target.value)} 
+        required 
+      />
+    </div>
+    <div>
+      <label>Email:</label>
+      <input 
+        type="email" 
+        value={email} 
+        onChange={(e) => setEmail(e.target.value)} 
+        required 
+      />
+    </div>
+    <button type="submit" disabled={isLoading}>
+      {isLoading ? 'Registrando...' : 'Registrar'}
+    </button>
+    {errorMessage && <div className="error-message">{errorMessage}</div>}
+  </form>
+)}
     </div>
   );
 };

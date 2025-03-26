@@ -95,11 +95,82 @@ app.post('/api/register', upload.single('profilePicture'), async (req, res) => {
     await db.promise().query(query, [name, email, hashedPassword, weight, height, profilePicture]);
 
     const mailOptions = {
-      from: 'soportet508@gmail.com',
+      from: '"MUSCLEGYM" <soportet508@gmail.com>',
       to: email,
-      subject: 'Confirmación de Registro',
-      html: `<h2>Bienvenido, ${name}!</h2><p>Tu registro ha sido exitoso.</p>`
-    };
+      subject: '🎉 ¡Bienvenido a MUSCLEGYM!',
+      html: `
+      <!DOCTYPE html>
+      <html lang="es">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Confirmación de Registro</title>
+          <style>
+              body {
+                  font-family: Arial, sans-serif;
+                  background-color: #f4f4f4;
+                  margin: 0;
+                  padding: 0;
+                  text-align: center;
+              }
+              .container {
+                  max-width: 600px;
+                  margin: 20px auto;
+                  background: white;
+                  padding: 20px;
+                  border-radius: 8px;
+                  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+              }
+              .logo {
+                  max-width: 150px;
+                  margin-bottom: 20px;
+              }
+              h2 {
+                  color: #333;
+              }
+              p {
+                  font-size: 16px;
+                  color: #555;
+                  line-height: 1.6;
+              }
+              .button {
+                  display: inline-block;
+                  background-color: #007bff;
+                  color: white;
+                  padding: 12px 20px;
+                  text-decoration: none;
+                  border-radius: 5px;
+                  font-weight: bold;
+                  margin-top: 20px;
+              }
+              .footer {
+                  font-size: 12px;
+                  color: #777;
+                  margin-top: 20px;
+              }
+          </style>
+      </head>
+      <body>
+          <div class="container">
+              
+              <!-- Encabezado -->
+              <h2>¡Bienvenido, ${name}!</h2>
+              
+              <!-- Mensaje -->
+              <p>Gracias por registrarte en <strong>MUSCLEGYM</strong>.  
+                 Ahora formas parte de nuestra comunidad. 🎉</p>
+
+              <!-- Pie de página -->
+              <p class="footer">
+                  © 2025 MUSCLEGYM | Todos los derechos reservados.  
+                  <br>Si no fuiste tú quien realizó este registro, ignora este mensaje.
+              </p>
+          </div>
+      </body>
+      </html>
+      `
+  };
+  
 
     transporter.sendMail(mailOptions);
     res.status(201).json({ message: 'Registro exitoso y correo enviado!' });
@@ -170,13 +241,89 @@ app.post('/api/register-program', (req, res) => {
       return res.status(500).json({ error: 'Error al registrar' });
     }
 
-    // Configurar opciones del correo de confirmación
     const mailOptions = {
-      from: 'soportet508@gmail.com',
+      from: '"MUSCLEGYM" <soportet508@gmail.com>',
       to: email,
-      subject: 'Confirmación de Registro en Programa',
-      html: `<h2>Hola, ${name}!</h2><p>Te has registrado exitosamente en el programa: <b>${program}</b>.</p><p>Gracias por participar.</p>`
-    };
+      subject: '🎉 ¡Registro Exitoso en el Programa!',
+      html: `
+      <!DOCTYPE html>
+      <html lang="es">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Confirmación de Registro</title>
+          <style>
+              body {
+                  font-family: Arial, sans-serif;
+                  background-color: #f4f4f4;
+                  margin: 0;
+                  padding: 0;
+                  text-align: center;
+              }
+              .container {
+                  max-width: 600px;
+                  margin: 20px auto;
+                  background: white;
+                  padding: 20px;
+                  border-radius: 8px;
+                  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+              }
+              .logo {
+                  max-width: 150px;
+                  margin-bottom: 20px;
+              }
+              h2 {
+                  color: #333;
+              }
+              p {
+                  font-size: 16px;
+                  color: #555;
+                  line-height: 1.6;
+              }
+              .program-name {
+                  font-weight: bold;
+                  color: #007bff;
+              }
+              .button {
+                  display: inline-block;
+                  background-color: #007bff;
+                  color: white;
+                  padding: 12px 20px;
+                  text-decoration: none;
+                  border-radius: 5px;
+                  font-weight: bold;
+                  margin-top: 20px;
+              }
+              .footer {
+                  font-size: 12px;
+                  color: #777;
+                  margin-top: 20px;
+              }
+          </style>
+      </head>
+      <body>
+          <div class="container">
+              
+              <!-- Encabezado -->
+              <h2>¡Hola, ${name}!</h2>
+              
+              <!-- Mensaje principal -->
+              <p>Te has registrado exitosamente en el programa:</p>
+              <p class="program-name">${program}</p>
+              
+              <p>Gracias por ser parte de nuestra comunidad.</p>
+  
+              <!-- Pie de página -->
+              <p class="footer">
+                  © 2025 MUSCLEGYM | Todos los derechos reservados.  
+                  <br>Si no fuiste tú quien realizó este registro, ignora este mensaje.
+              </p>
+          </div>
+      </body>
+      </html>
+      `
+  };
+  
 
     // Enviar el correo de confirmación
     transporter.sendMail(mailOptions, (mailErr, info) => {
@@ -257,22 +404,33 @@ app.post('/api/pay-membership', async (req, res) => {
     const query = 'INSERT INTO membership_payments (email, membership_name, registration_date) VALUES (?, ?, NOW())';
     await db.promise().query(query, [email, membershipName]);
 
-    // Enviar correo de confirmación
+    // Configurar correo con diseño profesional
     const mailOptions = {
-      from: 'tu-email@example.com',
+      from: `"MUSCLEGYM" <soportet508@gmail.com>`,
       to: email,
-      subject: 'Confirmación de Pago',
-      text: `Tu pago para la membresía ${membershipName} ha sido procesado con éxito.`,
+      subject: '🎉 ¡Confirmación de Pago de Membresía!',
+      html: `
+        <div style="font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f4;">
+          <div style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <h2 style="color: #333;">¡Gracias por tu pago, ${email}!</h2>
+            <p style="color: #555;">Tu pago para la membresía <b>${membershipName}</b> ha sido procesado con éxito.</p>
+            <p style="color: #555;">Si tienes alguna duda, contáctanos en <a href="mailto:soportet508@gmail.com">soportet508@gmail.com</a>.</p>
+            <p style="margin-top: 20px; color: #777;">Atentamente,<br><b>El equipo de MUSCLEGYM</b></p>
+          </div>
+        </div>
+      `,
     };
 
-    transporter.sendMail(mailOptions);
+    // Enviar correo
+    await transporter.sendMail(mailOptions);
 
-    res.status(200).json({ message: 'Pago procesado con éxito' });
+    res.status(200).json({ message: 'Pago procesado con éxito y correo enviado' });
   } catch (error) {
     console.error('Error al procesar el pago:', error);
     res.status(500).json({ error: 'Error al procesar el pago' });
   }
 });
+
 app.get("/api/productos", (req, res) => {
   const sql = "SELECT * FROM productos";
   db.query(sql, (err, results) => {

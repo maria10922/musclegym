@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-
 import { 
   FaBars, FaHome, FaInfoCircle, FaDumbbell, FaStore, 
-  FaUserPlus, FaUser, FaSignInAlt, FaShoppingCart, 
+  FaUserPlus, FaUser , FaSignInAlt, FaShoppingCart, 
   FaMoon, FaSun, FaSearch 
 } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import "./css/store.css";
 
 const Store = () => {
@@ -15,6 +15,7 @@ const Store = () => {
   const [navOpen, setNavOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [searchTerm, setSearchTerm] = useState(""); // Estado para la búsqueda
+  const [notification, setNotification] = useState(""); // Estado para la notificación
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -61,6 +62,14 @@ const Store = () => {
     existingCart.push(product);
     localStorage.setItem("cart", JSON.stringify(existingCart));
     setCart(existingCart);
+    
+    // Mostrar notificación
+    setNotification(`${product.nombre} ha sido agregado al carrito.`);
+    
+    // Ocultar la notificación después de 3 segundos
+    setTimeout(() => {
+      setNotification("");
+    }, 3000);
   };
 
   return (
@@ -95,8 +104,8 @@ const Store = () => {
             { path: "/about", icon: <FaInfoCircle />, name: "Acerca de" },
             { path: "/programs", icon: <FaDumbbell />, name: "Programas" },
             { path: "/store", icon: <FaStore />, name: "Tienda" },
-            { path: "/membership", icon: <FaUserPlus />, name: "Membresía" },
-            { path: "/profile", icon: <FaUser />, name: "Perfil" },
+            { path: "/membership", icon: <FaUser Plus />, name: "Membresía" },
+            { path: "/profile", icon: <FaUser  />, name: "Perfil" },
             { path: "/login", icon: <FaSignInAlt />, name: "Acceso" },
             { path: "/cart", icon: <FaShoppingCart />, name: "Carrito" }
           ].map(({ path, icon, name }) => (
@@ -117,6 +126,9 @@ const Store = () => {
         <h2>Tienda eSport Fitness</h2>
         <p>Compra productos de calidad para mejorar tu rendimiento y estilo de vida.</p>
         
+        {/* Notificación */}
+        {notification && <div className="notification">{notification}</div>}
+
         <div className="store-grid">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
@@ -152,10 +164,10 @@ const Store = () => {
           <div className="footer-section">
             <h3>🌐 Síguenos</h3>
             <div className="social-icons">
-              <a href="#"><i className="fab fa-facebook"></i></a>
-              <a href="#"><i className="fab fa-instagram"></i></a>
-              <a href="#"><i className="fab fa-twitter"></i></a>
-              <a href="#"><i className="fab fa-youtube"></i></a>
+              <a href="#"><FaFacebook /></a>
+              <a href="#"><FaInstagram /></a>
+              <a href="#"><FaTwitter /></a>
+              <a href="#"><FaYoutube /></a>
             </div>
           </div>
         </div>

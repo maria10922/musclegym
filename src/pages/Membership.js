@@ -5,6 +5,7 @@ import {
   FaUserPlus, FaUser, FaSignInAlt, FaShoppingCart, 
   FaMoon, FaSun, FaCheck, FaStar 
 } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import './css/membership.css';
 
 const Membership = () => {
@@ -205,14 +206,15 @@ const Membership = () => {
                 </div>
       
                 <div className="footer-section">
-                  <h3>🌐 Síguenos</h3>
-                  <div className="social-icons">
-                    <a href="#"><i className="fab fa-facebook"></i></a>
-                    <a href="#"><i className="fab fa-instagram"></i></a>
-                    <a href="#"><i className="fab fa-twitter"></i></a>
-                    <a href="#"><i className="fab fa-youtube"></i></a>
-                  </div>
-                </div>
+  <h3>🌐 Síguenos</h3>
+  <div className="social-icons">
+    <a href="#"><FaFacebook /></a>
+    <a href="#"><FaInstagram /></a>
+    <a href="#"><FaTwitter /></a>
+    <a href="#"><FaYoutube /></a>
+  </div>
+</div>
+
               </div>
             </footer>
     </div>

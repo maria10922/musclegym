@@ -3,7 +3,7 @@ import axios from "axios";
 import "./css/Cart.css";
 import { FaBars, FaHome, FaInfoCircle, FaDumbbell, FaStore, FaUserPlus, FaUser, FaSignInAlt, FaShoppingCart, FaMoon, FaSun } from 'react-icons/fa';
 import { Link, useLocation } from "react-router-dom";
-
+import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const Cart = ({ updateCart = () => {} }) => {
   const [cart, setCart] = useState([]);
@@ -13,6 +13,7 @@ const Cart = ({ updateCart = () => {} }) => {
   const [tooltip, setTooltip] = useState("");
   const [navOpen, setNavOpen] = useState(false);
   const location = useLocation();
+
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
@@ -41,115 +42,150 @@ const Cart = ({ updateCart = () => {} }) => {
     localStorage.setItem("cart", JSON.stringify(newCart));
     updateCart(newCart);
   };
+
   const removeFromCart = (productId) => {
     const newCart = cart.filter((item) => item.id !== productId);
     saveCart(newCart);
   };
-  
+
   const purchaseProduct = async (product) => {
     const email = prompt("Ingresa tu correo electrónico para recibir la factura:");
     if (!email) {
       alert("El correo electrónico es obligatorio para la compra.");
       return;
     }
-
+  
     try {
       const token = localStorage.getItem("token");
+      const cantidad = parseInt(product.cantidad) || 1; // Asegúrate de que cantidad sea un número
+      const precio = parseFloat(product.precio) || 0; // Asegúrate de que precio sea un número
+      const total = precio * cantidad;
+  
+      const requestData = {
+        productId: product.id,
+        nombre: product.nombre,
+        cantidad,
+        precio,
+        total,
+        email,
+      };
+  
+      console.log("Enviando datos a /api/comprar:", requestData); // Verifica los datos
+  
       const response = await axios.post(
         "http://localhost:5001/api/comprar",
-        {
-          productId: parseInt(product.id),
-          cantidad: parseInt(product.cantidad),
-          precio: parseFloat(product.precio),
-          total: parseFloat(product.precio) * parseInt(product.cantidad),
-          email,
-        },
+        requestData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
+  
       alert(response.data.message);
       removeFromCart(product.id);
     } catch (error) {
-      console.error("Error en la compra:", error);
+      console.error("Error en la compra:", error.response?.data || error.message);
       alert(error.response?.data?.error || "Error en la compra.");
     }
   };
+  
 
   const purchaseAll = async () => {
     if (cart.length === 0) {
       alert("El carrito está vacío.");
       return;
     }
-
+  
     const email = prompt("Ingresa tu correo electrónico para recibir la factura:");
     if (!email) {
       alert("El correo electrónico es obligatorio para la compra.");
       return;
     }
-
+  
     try {
       const token = localStorage.getItem("token");
       const cartFormatted = cart.map((item) => ({
         productId: parseInt(item.id),
-        cantidad: parseInt(item.cantidad),
-        precio: parseFloat(item.precio),
-        total: parseFloat(item.precio) * parseInt(item.cantidad),
+        nombre: item.nombre, // Asegúrate de que esto sea una cadena
+        cantidad: parseInt(item.cantidad) || 1,
+        precio: parseFloat(item.precio) || 0,
+        total: (parseFloat(item.precio) || 0) * (parseInt(item.cantidad) || 1),
       }));
-
+  
+      console.log("Enviando datos a /api/comprar-todo:", cartFormatted); // Verifica los datos
+  
       const response = await axios.post(
         "http://localhost:5001/api/comprar-todo",
         { cart: cartFormatted, email },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
+  
       alert(response.data.message);
       saveCart([]);
     } catch (error) {
-      console.error("Error en la compra múltiple:", error);
+      console.error("Error en la compra múltiple:", error.response?.data || error.message);
       alert(error.response?.data?.error || "Error en la compra.");
     }
+  };
+  
+
+  const increaseQuantity = (productId) => {
+    const newCart = cart.map(item => {
+      if (item.id === productId) {
+        return { ...item, cantidad: (item.cantidad || 1) + 1 };
+      }
+      return item;
+    });
+    saveCart(newCart);
+  };
+
+  const decreaseQuantity = (productId) => {
+    const newCart = cart.map(item => {
+      if (item.id === productId && (item.cantidad || 1) > 1) {
+        return { ...item, cantidad: (item.cantidad || 1) - 1 };
+      }
+      return item;
+    });
+    saveCart(newCart);
   };
 
   return (
     <div className="page">
       {/* Sidebar */}
-            <div className={`sidebar ${navOpen ? "open" : ""}`}>
-              <button className="menu" onClick={() => setNavOpen(!navOpen)}>
-                <img src="/imagenes/logo.png" alt="Logo" className="logo" />
-              </button>
-      
-              {/* Botón de cambio de tema */}
-              <button className="theme-toggle" onClick={toggleTheme}>
-                {theme === "light" ? <FaMoon /> : <FaSun />}
-                {navOpen && <span>{theme === "light" ? "Modo Oscuro" : "Modo Claro"}</span>}
-              </button>
-      
-              {/* Menú de navegación */}
-              <nav>
-                {[
-                  { path: "/dashboard", icon: <FaHome />, name: "Inicio" },
-                  { path: "/about", icon: <FaInfoCircle />, name: "Acerca de" },
-                  { path: "/programs", icon: <FaDumbbell />, name: "Programas" },
-                  { path: "/store", icon: <FaStore />, name: "Tienda" },
-                  { path: "/membership", icon: <FaUserPlus />, name: "Membresía" },
-                  { path: "/profile", icon: <FaUser />, name: "Perfil" },
-                  { path: "/login", icon: <FaSignInAlt />, name: "Acceso" },
-                  { path: "/cart", icon: <FaShoppingCart />, name: "Carrito" },
-                ].map(({ path, icon, name }) => (
-                  <Link
-                    key={path}
-                    to={path}
-                    className={location.pathname === path ? "active" : ""}
-                    onMouseEnter={() => setTooltip(name)}
-                    onMouseLeave={() => setTooltip("")}
-                  >
-                    {icon}
-                    {navOpen && <span>{name}</span>}
-                    {!navOpen && tooltip === name && <div className="tooltip">{name}</div>}
-                  </Link>
-                ))}
-              </nav>
-            </div>
+      <div className={`sidebar ${navOpen ? "open" : ""}`}>
+        <button className="menu" onClick={() => setNavOpen(!navOpen)}>
+          <img src="/imagenes/logo.png" alt="Logo" className="logo" />
+        </button>
+
+        {/* Botón de cambio de tema */}
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {theme === "light" ? <FaMoon /> : <FaSun />}
+          {navOpen && <span>{theme === "light" ? "Modo Oscuro" : "Modo Claro"}</span>}
+        </button>
+
+        {/* Menú de navegación */}
+        <nav>
+          {[ 
+            { path: "/dashboard", icon: <FaHome />, name: "Inicio" },
+            { path: "/about", icon: <FaInfoCircle />, name: "Acerca de" },
+            { path: "/programs", icon: <FaDumbbell />, name: "Programas" },
+            { path: "/store", icon: <FaStore />, name: "Tienda" },
+            { path: "/membership", icon: <FaUserPlus />, name: "Membresía" },
+            { path: "/profile", icon: <FaUser />, name: "Perfil" },
+            { path: "/login", icon: <FaSignInAlt />, name: "Acceso" },
+            { path: "/cart", icon: <FaShoppingCart />, name: "Carrito" },
+          ].map(({ path, icon, name }) => (
+            <Link
+              key={path}
+              to={path}
+              className={location.pathname === path ? "active" : ""}
+              onMouseEnter={() => setTooltip(name)}
+              onMouseLeave={() => setTooltip("")}
+            >
+              {icon}
+              {navOpen && <span>{name}</span>}
+              {!navOpen && tooltip === name && <div className="tooltip">{name}</div>}
+            </Link>
+          ))}
+        </nav>
+      </div>
       <h2>🛒 Carrito de Compras</h2>
       {cart.length === 0 ? (
         <p>El carrito está vacío.</p>
@@ -173,8 +209,12 @@ const Cart = ({ updateCart = () => {} }) => {
                     <span>{product.nombre}</span>
                   </td>
                   <td>${parseFloat(product.precio).toFixed(2)}</td>
-                  <td>{parseInt(product.cantidad)}</td>
-                  <td>${(parseFloat(product.precio) * parseInt(product.cantidad)).toFixed(2)}</td>
+                  <td>
+                    <button onClick={() => decreaseQuantity(product.id)}>-</button>
+                    {parseInt(product.cantidad) || 1}
+                    <button onClick={() => increaseQuantity(product.id)}>+</button>
+                  </td>
+                  <td>${(parseFloat(product.precio) * (parseInt(product.cantidad) || 1)).toFixed(2)}</td>
                   <td>
                     <button onClick={() => purchaseProduct(product)} className="btn-purchase">
                       Comprar
@@ -219,10 +259,10 @@ const Cart = ({ updateCart = () => {} }) => {
           <div className="footer-section">
             <h3>🌐 Síguenos</h3>
             <div className="social-icons">
-              <a href="#"><i className="fab fa-facebook"></i></a>
-              <a href="#"><i className="fab fa-instagram"></i></a>
-              <a href="#"><i className="fab fa-twitter"></i></a>
-              <a href="#"><i className="fab fa-youtube"></i></a>
+              <a href="#"><FaFacebook /></a>
+              <a href="#"><FaInstagram /></a>
+              <a href="#"><FaTwitter /></a>
+              <a href="#"><FaYoutube /></a>
             </div>
           </div>
         </div>

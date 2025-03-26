@@ -78,6 +78,12 @@ tfoot td {
   font-weight: bold;
   background-color: #f8f9fa00;
 }
+.sidebar.open ~ .cart-container {
+  margin-left: 180px;
+  transition: margin 0.3s ease-in-out;
+  bottom: 0;
+}
+
 .footer6 {
   background: var(--color-steel);
   padding: 20px 0;
@@ -86,18 +92,17 @@ tfoot td {
   text-align: center;
   transition: margin 0.3s ease-in-out;
   margin-top: 20px; /* Adjusted margin */
-  margin-bottom: 0; /* Removed negative margin */
-  margin-left: 0; /* Removed left margin */
+  margin-bottom: -60px; /* Removed negative margin */
+  margin-left: -20px; /* Removed left margin */
 }
-
 
 /* Asegurar que el footer siempre esté centrado y no afectado por el sidebar */
 .sidebar.open ~ .footer6 {
-  margin-left: 183px;
-  padding-right: 20px;
+  margin-left: 135px;
+  padding-right: 0px;
   transition: margin 0.3s ease-in-out;
   bottom: 0;
-  width: calc(100% - 50px); /* Ancho del sidebar */
+  width: calc(110% - 70px); /* Ancho del sidebar */
 }
 .search-bar {
   display: flex;

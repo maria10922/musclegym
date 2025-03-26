@@ -113,7 +113,18 @@ p {
     height: 150px;
   }
 }
-
+.notification {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  background-color: #4caf50; /* Verde */
+  justify-content: center;
+  color: white;
+  padding: 30px 50px;
+  border-radius: 5px;
+  z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+  transition: opacity 0.5s ease;
+}
 
 .footer3 {
   background: var(--color-steel);

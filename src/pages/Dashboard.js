@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   FaBars, FaHome, FaInfoCircle, FaDumbbell, FaStore, FaUserPlus, FaUser,
-  FaSignInAlt, FaShoppingCart, FaMoon, FaSun, FaFacebook, FaInstagram, FaTwitter, FaYoutube
+  FaSignInAlt, FaShoppingCart, FaMoon, FaSun,
 } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import axios from "axios";
 import "./css/Dashboard.css";
 
@@ -158,7 +159,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <footer className="footer">
+      <footer className="footer0">
         <div className="footer-container">
           <div className="footer-section">
             <h3>🏋️ MUSCLEGYM</h3>
@@ -175,14 +176,15 @@ const Dashboard = () => {
           </div>
 
           <div className="footer-section">
-            <h3>🌐 Síguenos</h3>
-            <div className="social-icons">
-              <a href="#"><i className="fab fa-facebook"></i></a>
-              <a href="#"><i className="fab fa-instagram"></i></a>
-              <a href="#"><i className="fab fa-twitter"></i></a>
-              <a href="#"><i className="fab fa-youtube"></i></a>
-            </div>
-          </div>
+  <h3>🌐 Síguenos</h3>
+  <div className="social-icons">
+    <a href="#"><FaFacebook /></a>
+    <a href="#"><FaInstagram /></a>
+    <a href="#"><FaTwitter /></a>
+    <a href="#"><FaYoutube /></a>
+  </div>
+</div>
+
         </div>
       </footer>
     </div>
